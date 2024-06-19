@@ -8,17 +8,10 @@
 import Foundation
 // MARK: - Welcome
 struct Weathers: Codable {
-    let coord: Coord
     let weather: [Weather]
     let main: Main
     let wind: Wind
     let name: String
-}
-
-
-// MARK: - Coord
-struct Coord: Codable {
-    let lon, lat: Double
 }
 
 // MARK: - Main
@@ -33,7 +26,6 @@ struct Main: Codable {
         case humidity
     }
 }
-
 
 // MARK: - Weather
 struct Weather: Codable {

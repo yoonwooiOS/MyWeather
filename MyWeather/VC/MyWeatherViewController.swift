@@ -20,20 +20,30 @@ class MyWeatherViewController: UIViewController {
     let reloadButton = CustomSFSymbolButton(sfSymbolName: "arrow.clockwise", tintColor: .white)
     let temperatureLabel = PaddedLabel(padding: Label.Font.padding, text: "")
     let humidityLabel = PaddedLabel(padding: Label.Font.padding, text: "")
-    let weatherImage = WeatherImageView(iconName: "", backgroundColor: .white)
+    let weatherImage = WeatherImageView(iconName: "", backgroundColor: .clear)
     let windSpeedLabel = PaddedLabel(padding: Label.Font.padding, text: "")
     let messageLabel = PaddedLabel(padding: Label.Font.padding, text: "")
     
-    var weatherdata: Weathers = Weathers(coord: Coord(lon: 0, lat: 0), weather: [Weather(main: "", description: "", icon: "")], main: Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity: 0), wind: Wind(speed: 0), name: ""){
+    
+    
+    var weatherdata: Weathers = Weathers( weather: [Weather(main: "", description: "", icon: "")], main: Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity: 0), wind: Wind(speed: 0), name: ""){
         
         didSet {
             locationLabel.text = weatherdata.name
+            
             temperatureLabel.text = "지금은 \(decimalPointFormatter(newValue: (weatherdata.main.temp - 273.15)))도에요"
+            temperatureLabel.backgroundColor = .white
+            
             humidityLabel.text = "\(weatherdata.main.humidity)% 만큼 습해요!"
+            humidityLabel.backgroundColor = .white
+            
             windSpeedLabel.text = "\(weatherdata.wind.speed)m/s의 바람이 불어요!"
+            windSpeedLabel.backgroundColor = .white
             let urlString = URL(string: "https://openweathermap.org/img/wn/\(weatherdata.weather[0].icon)@2x.png")
-            weatherImage.kf.setImage(with: urlString  )
+            weatherImage.kf.setImage(with: urlString)
+            weatherImage.backgroundColor = .white
             messageLabel.text = "좋은하루 되세요!"
+            messageLabel.backgroundColor = .white
             dateTimeLabel.text = nowDate()
         }
         
@@ -43,12 +53,12 @@ class MyWeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        callRequest()
+        //        callRequest()
         setUpHierarchy()
         setUpLayout()
         setUpUI()
         setUpButton()
-        checkDeviceLocationAuthorization()
+       
     }
     private func setUpHierarchy() {
         
@@ -77,7 +87,7 @@ class MyWeatherViewController: UIViewController {
         
         locationSymbolLabel.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.top.equalTo(dateTimeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
             $0.size.equalTo(20)
             
         }
@@ -85,21 +95,21 @@ class MyWeatherViewController: UIViewController {
         locationLabel.snp.makeConstraints {
             
             $0.leading.equalTo(locationSymbolLabel.snp.trailing).offset(20)
-            $0.top.equalTo(dateTimeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
             $0.height.equalTo(20)
             
         }
         reloadButton.snp.makeConstraints {
             
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            $0.top.equalTo(dateTimeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
             $0.size.equalTo(20)
             
         }
         shareButton.snp.makeConstraints {
             
             $0.trailing.equalTo(reloadButton.snp.leading).offset(-20)
-            $0.top.equalTo(dateTimeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
             $0.size.equalTo(20)
             
         }
@@ -112,21 +122,21 @@ class MyWeatherViewController: UIViewController {
         
         humidityLabel.snp.makeConstraints {
             
-            $0.top.equalTo(temperatureLabel.snp.bottom).offset(16)
+            $0.top.equalTo(temperatureLabel.snp.bottom).offset(8)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.height.equalTo(30)
         }
         
         weatherImage.snp.makeConstraints {
             
-            $0.top.equalTo(humidityLabel.snp.bottom).offset(16)
+            $0.top.equalTo(humidityLabel.snp.bottom).offset(8)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.size.equalTo(140)
         }
         
         messageLabel.snp.makeConstraints {
             
-            $0.top.equalTo(weatherImage.snp.bottom).offset(16)
+            $0.top.equalTo(weatherImage.snp.bottom).offset(8)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.height.equalTo(30)
         }
@@ -139,7 +149,7 @@ class MyWeatherViewController: UIViewController {
     private func setUpUI() {
         
         view.backgroundColor = .brown
-        
+        locationManager.delegate = self
     }
     
     func setUpButton() {
@@ -154,36 +164,41 @@ class MyWeatherViewController: UIViewController {
         let str = String(format: "%.1f", value)
         
         return str
-    
+        
     }
     
-   
+    
     
     @objc func reloadButtonTapped() {
         
         callRequest()
         
     }
-
-    func nowDate() -> String {
     
-            let date =  Date()
-            let myFormatter = DateFormatter()
-            myFormatter.dateFormat = "M월 dd일 H시 mm분"
-            let dateString = myFormatter.string(from: date)
-            return dateString
+    func nowDate() -> String {
+        
+        let date =  Date()
+        let myFormatter = DateFormatter()
+        myFormatter.dateFormat = "M월 dd일 H시 mm분"
+        let dateString = myFormatter.string(from: date)
+        return dateString
     }
     
     func callRequest() {
         
         let url = APIURL.weather
-        let parm: Parameters = ["appid" : APIKey.weatherKey]
-        AF.request(url, method: .get, parameters: parm).responseDecodable(of: Weathers.self){ response in
+        print(APIURL.weather)
+        let parm: Parameters = [
+            "appid" : APIKey.weatherKey,
+            "lat" :  APICoordinate.latitude,
+            "lon" :  APICoordinate.longitude
+        ]
+        AF.request(url, parameters: parm).responseDecodable(of: Weathers.self){ response in
             switch response.result {
             case .success(let value):
                 print("SUCCESS")
-//                dump(value)
-//                print(value.weather[0].icon,"12312312")
+                //                dump(value)
+        
                 self.weatherdata = value
                 
             case .failure(let error):
@@ -232,13 +247,13 @@ extension MyWeatherViewController {
             locationManager.requestWhenInUseAuthorization()
         case .denied:
             print("iOS 설정 창으로 이동하라는 얼럿을 띄워주기")
-   
+            
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation() // locationManager 실행
-            print("위치 정보 알려달라고 조릭 구성할 수 있음")
-      
-//        모든 케이스가 대응 될 때
-//        나중에 추가되는 case가 늘어날 수도 있으니까 미래 버전을 대응하기 위해 코드를 작성해놓는게 좋지 않을까?
+            print("위치 정보 알려달라고 로직 구성할 수 있음")
+            
+            //        모든 케이스가 대응 될 때
+            //        나중에 추가되는 case가 늘어날 수도 있으니까 미래 버전을 대응하기 위해 코드를 작성해놓는게 좋지 않을까?
         default:
             print(status)
         }
@@ -260,16 +275,20 @@ extension MyWeatherViewController: CLLocationManagerDelegate {
             print(coordinate.latitude)
             print(coordinate.longitude)
             
+            APICoordinate.latitude = String(coordinate.latitude)
+            APICoordinate.longitude = String(coordinate.longitude)
+            print(#function, APICoordinate.latitude,  APICoordinate.longitude)
             
+            callRequest()
         }
-        locationManager.startUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
     }
     //6. 사용자 위치를 가지고 오지 못했거나
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         print(#function)
     }
     //7. 사용자 권한 상태 변경(iOS14+ 기준으로 나뉨) + 인스턴스가 생성이 될 때도 호출됨
-//    사용자가 허용했었는데 아이폰 설정에서 나중에 허용을 거부했을 때
+    //    사용자가 허용했었는데 아이폰 설정에서 나중에 허용을 거부했을 때
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function, "iOS14+")
         checkDeviceLocationAuthorization()
