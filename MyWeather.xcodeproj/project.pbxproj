@@ -60,7 +60,7 @@
 		99708CEC2C2290C700A36B2C = {
 			isa = PBXGroup;
 			children = (
-				99708D222C22D3C700A36B2C /* Model */,
+				99708D2B2C2312E400A36B2C /* New Group */,
 				99708D0C2C2291F800A36B2C /* .gitignore */,
 				99708CF72C2290C700A36B2C /* MyWeather */,
 				99708CF62C2290C700A36B2C /* Products */,
@@ -79,17 +79,15 @@
 			isa = PBXGroup;
 			children = (
 				99708D0E2C22924D00A36B2C /* APIKey.swift */,
+				99708D222C22D3C700A36B2C /* Model */,
 				99708D192C22BD4800A36B2C /* Resource */,
+				99708D2C2C2312FC00A36B2C /* VC */,
 				99708CF82C2290C700A36B2C /* AppDelegate.swift */,
 				99708CFA2C2290C700A36B2C /* SceneDelegate.swift */,
-				99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */,
+				99708D2D2C23130F00A36B2C /* CustomView */,
 				99708D012C2290C800A36B2C /* Assets.xcassets */,
 				99708D032C2290C800A36B2C /* LaunchScreen.storyboard */,
 				99708D062C2290C800A36B2C /* Info.plist */,
-				99708D1E2C22BF4800A36B2C /* CustomSFSymbolButton.swift */,
-				99708D172C22BBA300A36B2C /* CustomLabel.swift */,
-				99708D1C2C22BE3100A36B2C /* WeatherImageView.swift */,
-				99708D202C22CD1300A36B2C /* PaddingLabel.swift */,
 			);
 			path = MyWeather;
 			sourceTree = "<group>";
@@ -108,6 +106,32 @@
 				99708D232C22D3E500A36B2C /* Weather.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		99708D2B2C2312E400A36B2C /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		99708D2C2C2312FC00A36B2C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		99708D2D2C23130F00A36B2C /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				99708D1E2C22BF4800A36B2C /* CustomSFSymbolButton.swift */,
+				99708D172C22BBA300A36B2C /* CustomLabel.swift */,
+				99708D1C2C22BE3100A36B2C /* WeatherImageView.swift */,
+				99708D202C22CD1300A36B2C /* PaddingLabel.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

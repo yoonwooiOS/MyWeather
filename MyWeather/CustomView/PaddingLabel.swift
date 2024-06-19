@@ -15,8 +15,8 @@ class PaddedLabel: UILabel {
         
         self.text = text
         self.textColor = .black
-        self.font = Label.Font.regular14
-        self.backgroundColor = .white
+        self.font = Label.Font.regular16
+        self.backgroundColor = .clear
         clipsToBounds = true
         layer.cornerRadius = 8
         
