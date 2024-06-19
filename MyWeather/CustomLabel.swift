@@ -9,13 +9,16 @@ import UIKit
 
 
 class CustomLabel: UILabel {
-
-    init(text: String, textColor: UIColor, font: UIFont) {
+    
+    init(text: String, textColor: UIColor, font: UIFont, backgroundColor: UIColor) {
         super.init(frame: .zero)
         
+      
         self.text = text
         self.textColor = textColor
         self.font = font
+        self.backgroundColor = backgroundColor
+        
     }
     
     override init(frame: CGRect) {

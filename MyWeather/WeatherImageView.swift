@@ -10,12 +10,12 @@ import Kingfisher
 
 class WeatherImageView: UIImageView {
 
-    init(urlString: String, backgroundColor: UIColor) {
+    init(iconName: String, backgroundColor: UIColor) {
         super.init(frame: .zero)
      
-        let urlString = URL(string: urlString)
-        
-        kf.setImage(with: urlString)
+       
+        let urlString = URL(string: "https://openweathermap.org/img/wn/\(iconName)@2x.png")
+        kf.setImage(with: urlString  )
         contentMode = .scaleToFill
         layer.cornerRadius = 4
         self.backgroundColor = backgroundColor
