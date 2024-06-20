@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import CoreLocation
 import Kingfisher
-import Alamofire
 
 class MyWeatherViewController: UIViewController {
     
@@ -171,7 +170,10 @@ class MyWeatherViewController: UIViewController {
     
     @objc func reloadButtonTapped() {
         
-        callRequest()
+        NetworkService.getWeather { value in
+            self.weatherdata = value
+        }
+
         
     }
     
@@ -183,31 +185,6 @@ class MyWeatherViewController: UIViewController {
         let dateString = myFormatter.string(from: date)
         return dateString
     }
-    
-    func callRequest() {
-        
-        let url = APIURL.weather
-        print(APIURL.weather)
-        let parm: Parameters = [
-            "appid" : APIKey.weatherKey,
-            "lat" :  APICoordinate.latitude,
-            "lon" :  APICoordinate.longitude
-        ]
-        AF.request(url, parameters: parm).responseDecodable(of: Weathers.self){ response in
-            switch response.result {
-            case .success(let value):
-                print("SUCCESS")
-                //                dump(value)
-        
-                self.weatherdata = value
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-        
-    }
-    
 }
 
 extension MyWeatherViewController {
@@ -221,7 +198,6 @@ extension MyWeatherViewController {
         } else {
             print("위치 서비스가 꺼져 있어서, 위치 권한 요청을 할 수 없어요.")
         }
-        
     }
     
     func checkCurrentLoactionAuthoriztion() {
@@ -278,8 +254,10 @@ extension MyWeatherViewController: CLLocationManagerDelegate {
             APICoordinate.latitude = String(coordinate.latitude)
             APICoordinate.longitude = String(coordinate.longitude)
             print(#function, APICoordinate.latitude,  APICoordinate.longitude)
-            
-            callRequest()
+            //MARK: 네트워크 분리 후 호출
+            NetworkService.getWeather { value in
+                self.weatherdata = value
+            }
         }
         self.locationManager.stopUpdatingLocation()
     }
