@@ -7,19 +7,20 @@
 
 import UIKit
 
-
+// 부, 뷰컨을 나눴을 때의 장단점에 대한 생각.
+// 액션을
 final class NasaView: BaseView {
-     let apiRequestButton = {
+      var apiRequestButton = {
         let view = UIButton()
         view.backgroundColor = .systemBlue
         return view
     }()
-    private let nasaImageView = {
+      let nasaImageView = {
         let view = UIImageView()
         view.backgroundColor = .systemGray5
         return view
     }()
-    private let progressLabel = {
+      let progressLabel = {
         let view = UILabel()
         view.backgroundColor = .systemGreen
         return view
