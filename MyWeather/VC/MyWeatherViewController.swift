@@ -10,180 +10,40 @@ import SnapKit
 import CoreLocation
 import Kingfisher
 
-class MyWeatherViewController: UIViewController {
-    
-    var dateTimeLabel = CustomLabel(text: "" , textColor: .white, font: Label.Font.regular12, backgroundColor: .clear)
-    let locationSymbolLabel = CustomSFSymbolButton(sfSymbolName: "location.fill", tintColor: .white)
-    let locationLabel = CustomLabel(text: "", textColor: .white, font: Label.Font.bold16, backgroundColor: .clear)
-    let shareButton = CustomSFSymbolButton(sfSymbolName: "square.and.arrow.up", tintColor: .white)
-    let reloadButton = CustomSFSymbolButton(sfSymbolName: "arrow.clockwise", tintColor: .white)
-    let temperatureLabel = PaddedLabel(padding: Label.Font.padding, text: "")
-    let humidityLabel = PaddedLabel(padding: Label.Font.padding, text: "")
-    let weatherImage = WeatherImageView(iconName: "", backgroundColor: .clear)
-    let windSpeedLabel = PaddedLabel(padding: Label.Font.padding, text: "")
-    let messageLabel = PaddedLabel(padding: Label.Font.padding, text: "")
+class MyWeatherViewController: BaseViewController {
     
     
-    
-    var weatherdata: Weathers = Weathers( weather: [Weather(main: "", description: "", icon: "")], main: Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity: 0), wind: Wind(speed: 0), name: ""){
         
-        didSet {
-            locationLabel.text = weatherdata.name
-            
-            temperatureLabel.text = "지금은 \(decimalPointFormatter(newValue: (weatherdata.main.temp - 273.15)))도에요"
-            temperatureLabel.backgroundColor = .white
-            
-            humidityLabel.text = "\(weatherdata.main.humidity)% 만큼 습해요!"
-            humidityLabel.backgroundColor = .white
-            
-            windSpeedLabel.text = "\(weatherdata.wind.speed)m/s의 바람이 불어요!"
-            windSpeedLabel.backgroundColor = .white
-            let urlString = URL(string: "https://openweathermap.org/img/wn/\(weatherdata.weather[0].icon)@2x.png")
-            weatherImage.kf.setImage(with: urlString)
-            weatherImage.backgroundColor = .white
-            messageLabel.text = "좋은하루 되세요!"
-            messageLabel.backgroundColor = .white
-            dateTimeLabel.text = nowDate()
-        }
-        
-    }
+    let mainView = MyWeatherView()
     
     let locationManager = CLLocationManager()
     
+    override func loadView() {
+        view = mainView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        callRequest()
-        setUpHierarchy()
-        setUpLayout()
-        setUpUI()
-        setUpButton()
        
-    }
-    private func setUpHierarchy() {
-        
-        view.addSubview(dateTimeLabel)
-        view.addSubview(locationSymbolLabel)
-        view.addSubview(locationLabel)
-        view.addSubview(reloadButton)
-        view.addSubview(shareButton)
-        view.addSubview(temperatureLabel)
-        view.addSubview(humidityLabel)
-        view.addSubview(weatherImage)
-        view.addSubview(windSpeedLabel)
-        view.addSubview(messageLabel)
-        
-        
+        setUpButton()
     }
     
-    private func setUpLayout() {
-        
-        dateTimeLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            
-        }
-        
-        
-        locationSymbolLabel.snp.makeConstraints {
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
-            $0.size.equalTo(20)
-            
-        }
-        
-        locationLabel.snp.makeConstraints {
-            
-            $0.leading.equalTo(locationSymbolLabel.snp.trailing).offset(20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
-            $0.height.equalTo(20)
-            
-        }
-        reloadButton.snp.makeConstraints {
-            
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
-            $0.size.equalTo(20)
-            
-        }
-        shareButton.snp.makeConstraints {
-            
-            $0.trailing.equalTo(reloadButton.snp.leading).offset(-20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(36)
-            $0.size.equalTo(20)
-            
-        }
-        temperatureLabel.snp.makeConstraints {
-            
-            $0.top.equalTo(locationSymbolLabel.snp.bottom).offset(16)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.height.equalTo(30)
-        }
-        
-        humidityLabel.snp.makeConstraints {
-            
-            $0.top.equalTo(temperatureLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.height.equalTo(30)
-        }
-        
-        weatherImage.snp.makeConstraints {
-            
-            $0.top.equalTo(humidityLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.size.equalTo(140)
-        }
-        
-        messageLabel.snp.makeConstraints {
-            
-            $0.top.equalTo(weatherImage.snp.bottom).offset(8)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.height.equalTo(30)
-        }
-        
-        
-        
-        
-    }
-    
-    private func setUpUI() {
-        
+     override func setUpView() {
         view.backgroundColor = .brown
         locationManager.delegate = self
     }
     
     func setUpButton() {
-        
-        reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
-        
-        
+        mainView.reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
     }
-    func decimalPointFormatter(newValue:Double) -> String {
-        
-        let value: Double = newValue
-        let str = String(format: "%.1f", value)
-        
-        return str
-        
-    }
+    
+    
     
     
     
     @objc func reloadButtonTapped() {
-        
         NetworkService.getWeather { value in
-            self.weatherdata = value
+            self.mainView.weatherdata = value
         }
-
-        
-    }
-    
-    func nowDate() -> String {
-        
-        let date =  Date()
-        let myFormatter = DateFormatter()
-        myFormatter.dateFormat = "M월 dd일 H시 mm분"
-        let dateString = myFormatter.string(from: date)
-        return dateString
     }
 }
 
@@ -256,7 +116,7 @@ extension MyWeatherViewController: CLLocationManagerDelegate {
             print(#function, APICoordinate.latitude,  APICoordinate.longitude)
             //MARK: 네트워크 분리 후 호출
             NetworkService.getWeather { value in
-                self.weatherdata = value
+                self.mainView.weatherdata = value
             }
         }
         self.locationManager.stopUpdatingLocation()

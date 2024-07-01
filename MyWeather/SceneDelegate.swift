@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let vc = MyWeatherViewController()
+        let vc = NasaViewController()
         window?.rootViewController = vc // sb entryPoint
         window?.makeKeyAndVisible()
     }

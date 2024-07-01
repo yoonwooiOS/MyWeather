@@ -31,13 +31,6 @@ class NetworkService {
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
 }
 
 
