@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99061F242C32804600D8559F /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F232C32804600D8559F /* BaseView.swift */; };
+		99061F262C32811F00D8559F /* MyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F252C32811F00D8559F /* MyWeatherView.swift */; };
+		99061F282C32841B00D8559F /* NasaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F272C32841B00D8559F /* NasaViewController.swift */; };
+		99061F2A2C32843C00D8559F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F292C32843C00D8559F /* BaseViewController.swift */; };
+		99061F2C2C3286BD00D8559F /* NasaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F2B2C3286BD00D8559F /* NasaView.swift */; };
 		99708CF92C2290C700A36B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CF82C2290C700A36B2C /* AppDelegate.swift */; };
 		99708CFB2C2290C700A36B2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CFA2C2290C700A36B2C /* SceneDelegate.swift */; };
 		99708CFD2C2290C700A36B2C /* MyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */; };
@@ -27,6 +32,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99061F232C32804600D8559F /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		99061F252C32811F00D8559F /* MyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWeatherView.swift; sourceTree = "<group>"; };
+		99061F272C32841B00D8559F /* NasaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaViewController.swift; sourceTree = "<group>"; };
+		99061F292C32843C00D8559F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		99061F2B2C3286BD00D8559F /* NasaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaView.swift; sourceTree = "<group>"; };
 		99708CF52C2290C700A36B2C /* MyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99708CF82C2290C700A36B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99708CFA2C2290C700A36B2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,11 +69,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99061F222C32803C00D8559F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				99061F232C32804600D8559F /* BaseView.swift */,
+				99061F292C32843C00D8559F /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		99708CEC2C2290C700A36B2C = {
 			isa = PBXGroup;
 			children = (
-				99708D2B2C2312E400A36B2C /* New Group */,
 				99708D0C2C2291F800A36B2C /* .gitignore */,
+				99708D2B2C2312E400A36B2C /* Nasa+URLSession */,
 				99708CF72C2290C700A36B2C /* MyWeather */,
 				99708CF62C2290C700A36B2C /* Products */,
 			);
@@ -80,6 +99,7 @@
 		99708CF72C2290C700A36B2C /* MyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				99061F222C32803C00D8559F /* Base */,
 				99708D0E2C22924D00A36B2C /* APIKey.swift */,
 				99708D222C22D3C700A36B2C /* Model */,
 				99708D192C22BD4800A36B2C /* Resource */,
@@ -111,17 +131,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		99708D2B2C2312E400A36B2C /* New Group */ = {
+		99708D2B2C2312E400A36B2C /* Nasa+URLSession */ = {
 			isa = PBXGroup;
 			children = (
+				99061F272C32841B00D8559F /* NasaViewController.swift */,
+				99061F2B2C3286BD00D8559F /* NasaView.swift */,
 			);
-			path = "New Group";
+			path = "Nasa+URLSession";
 			sourceTree = "<group>";
 		};
 		99708D2C2C2312FC00A36B2C /* VC */ = {
 			isa = PBXGroup;
 			children = (
 				99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */,
+				99061F252C32811F00D8559F /* MyWeatherView.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -221,12 +244,17 @@
 				99708D392C24658E00A36B2C /* NetworkService.swift in Sources */,
 				99708CFD2C2290C700A36B2C /* MyWeatherViewController.swift in Sources */,
 				99708D182C22BBA300A36B2C /* CustomLabel.swift in Sources */,
+				99061F282C32841B00D8559F /* NasaViewController.swift in Sources */,
+				99061F242C32804600D8559F /* BaseView.swift in Sources */,
+				99061F2A2C32843C00D8559F /* BaseViewController.swift in Sources */,
 				99708CF92C2290C700A36B2C /* AppDelegate.swift in Sources */,
+				99061F2C2C3286BD00D8559F /* NasaView.swift in Sources */,
 				99708D1F2C22BF4800A36B2C /* CustomSFSymbolButton.swift in Sources */,
 				99708D242C22D3E500A36B2C /* Weather.swift in Sources */,
 				99708D1D2C22BE3100A36B2C /* WeatherImageView.swift in Sources */,
 				99708D1B2C22BD5600A36B2C /* Resource.swift in Sources */,
 				99708D212C22CD1300A36B2C /* PaddingLabel.swift in Sources */,
+				99061F262C32811F00D8559F /* MyWeatherView.swift in Sources */,
 				99708D0F2C22924D00A36B2C /* APIKey.swift in Sources */,
 				99708CFB2C2290C700A36B2C /* SceneDelegate.swift in Sources */,
 			);
