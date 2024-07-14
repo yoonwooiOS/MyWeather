@@ -11,13 +11,10 @@ import CoreLocation
 import Kingfisher
 
 class MyWeatherViewController: BaseViewController {
-    
-    
-        
     let mainView = MyWeatherView()
     
     let locationManager = CLLocationManager()
-    
+    let viewModel = MyWeatherViewModel()
     override func loadView() {
         view = mainView
     }
@@ -35,15 +32,12 @@ class MyWeatherViewController: BaseViewController {
     func setUpButton() {
         mainView.reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
     }
-    
-    
-    
-    
+ 
     
     @objc func reloadButtonTapped() {
-        NetworkService.getWeather { value in
-            self.mainView.weatherdata = value
-        }
+//        APIManeger.fetchGetWeather(<#T##self: APIManeger##APIManeger#>)getWeather { value in
+//            self.mainView.weatherdata = value
+//        }
     }
 }
 
@@ -95,9 +89,9 @@ extension MyWeatherViewController {
         }
     }
 }
-
-//not deter
-//3. 위치 관련 프로토콜 선언: CLLocationManagerDelegate
+//
+////not deter
+////3. 위치 관련 프로토콜 선언: CLLocationManagerDelegate
 extension MyWeatherViewController: CLLocationManagerDelegate {
     //5. 사용자 위치를 성공적으로 가지고 온 경우
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -115,7 +109,7 @@ extension MyWeatherViewController: CLLocationManagerDelegate {
             APICoordinate.longitude = String(coordinate.longitude)
             print(#function, APICoordinate.latitude,  APICoordinate.longitude)
             //MARK: 네트워크 분리 후 호출
-            NetworkService.getWeather { value in
+            APIManeger.shared.fetchGetWeather { value in
                 self.mainView.weatherdata = value
             }
         }

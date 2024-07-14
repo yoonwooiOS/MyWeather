@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  APIManeger.swift
 //  MyWeather
 //
 //  Created by 김윤우 on 6/20/24.
@@ -8,9 +8,12 @@
 import Foundation
 import Alamofire
 
-class NetworkService {
+final class APIManeger {
     
-    static func getWeather(complitionHandler:@escaping (Weathers) -> Void) {
+    static let shared = APIManeger()
+    private init() { }
+    
+     func fetchGetWeather(complitionHandler:@escaping (Weathers) -> Void) {
         
         let url = APIURL.weather
         print(APIURL.weather)

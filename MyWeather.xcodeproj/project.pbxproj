@@ -12,6 +12,8 @@
 		99061F282C32841B00D8559F /* NasaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F272C32841B00D8559F /* NasaViewController.swift */; };
 		99061F2A2C32843C00D8559F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F292C32843C00D8559F /* BaseViewController.swift */; };
 		99061F2C2C3286BD00D8559F /* NasaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99061F2B2C3286BD00D8559F /* NasaView.swift */; };
+		9939D2C02C42902600497A81 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9939D2BF2C42902600497A81 /* Observable.swift */; };
+		9939D2C22C4293FC00497A81 /* MyWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9939D2C12C4293FC00497A81 /* MyWeatherViewModel.swift */; };
 		99708CF92C2290C700A36B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CF82C2290C700A36B2C /* AppDelegate.swift */; };
 		99708CFB2C2290C700A36B2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CFA2C2290C700A36B2C /* SceneDelegate.swift */; };
 		99708CFD2C2290C700A36B2C /* MyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */; };
@@ -28,7 +30,7 @@
 		99708D212C22CD1300A36B2C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708D202C22CD1300A36B2C /* PaddingLabel.swift */; };
 		99708D242C22D3E500A36B2C /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708D232C22D3E500A36B2C /* Weather.swift */; };
 		99708D2A2C22D6BC00A36B2C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 99708D292C22D6BC00A36B2C /* Alamofire */; };
-		99708D392C24658E00A36B2C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708D382C24658E00A36B2C /* NetworkService.swift */; };
+		99708D392C24658E00A36B2C /* APIManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99708D382C24658E00A36B2C /* APIManeger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		99061F272C32841B00D8559F /* NasaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaViewController.swift; sourceTree = "<group>"; };
 		99061F292C32843C00D8559F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		99061F2B2C3286BD00D8559F /* NasaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaView.swift; sourceTree = "<group>"; };
+		9939D2BF2C42902600497A81 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9939D2C12C4293FC00497A81 /* MyWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWeatherViewModel.swift; sourceTree = "<group>"; };
 		99708CF52C2290C700A36B2C /* MyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99708CF82C2290C700A36B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99708CFA2C2290C700A36B2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +56,7 @@
 		99708D1E2C22BF4800A36B2C /* CustomSFSymbolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSFSymbolButton.swift; sourceTree = "<group>"; };
 		99708D202C22CD1300A36B2C /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		99708D232C22D3E500A36B2C /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		99708D382C24658E00A36B2C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		99708D382C24658E00A36B2C /* APIManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManeger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				99708D012C2290C800A36B2C /* Assets.xcassets */,
 				99708D032C2290C800A36B2C /* LaunchScreen.storyboard */,
 				99708D062C2290C800A36B2C /* Info.plist */,
+				9939D2BF2C42902600497A81 /* Observable.swift */,
 			);
 			path = MyWeather;
 			sourceTree = "<group>";
@@ -126,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				99708D232C22D3E500A36B2C /* Weather.swift */,
-				99708D382C24658E00A36B2C /* NetworkService.swift */,
+				99708D382C24658E00A36B2C /* APIManeger.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			children = (
 				99708CFC2C2290C700A36B2C /* MyWeatherViewController.swift */,
 				99061F252C32811F00D8559F /* MyWeatherView.swift */,
+				9939D2C12C4293FC00497A81 /* MyWeatherViewModel.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -241,7 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99708D392C24658E00A36B2C /* NetworkService.swift in Sources */,
+				99708D392C24658E00A36B2C /* APIManeger.swift in Sources */,
 				99708CFD2C2290C700A36B2C /* MyWeatherViewController.swift in Sources */,
 				99708D182C22BBA300A36B2C /* CustomLabel.swift in Sources */,
 				99061F282C32841B00D8559F /* NasaViewController.swift in Sources */,
@@ -250,9 +256,11 @@
 				99708CF92C2290C700A36B2C /* AppDelegate.swift in Sources */,
 				99061F2C2C3286BD00D8559F /* NasaView.swift in Sources */,
 				99708D1F2C22BF4800A36B2C /* CustomSFSymbolButton.swift in Sources */,
+				9939D2C22C4293FC00497A81 /* MyWeatherViewModel.swift in Sources */,
 				99708D242C22D3E500A36B2C /* Weather.swift in Sources */,
 				99708D1D2C22BE3100A36B2C /* WeatherImageView.swift in Sources */,
 				99708D1B2C22BD5600A36B2C /* Resource.swift in Sources */,
+				9939D2C02C42902600497A81 /* Observable.swift in Sources */,
 				99708D212C22CD1300A36B2C /* PaddingLabel.swift in Sources */,
 				99061F262C32811F00D8559F /* MyWeatherView.swift in Sources */,
 				99708D0F2C22924D00A36B2C /* APIKey.swift in Sources */,
