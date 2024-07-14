@@ -19,6 +19,7 @@ class Observable<T> {
         self.value = value
     }
     func bind(closure: @escaping (T) -> Void) {
+        closure(value)
         self.closure = closure
     }
 }

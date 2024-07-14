@@ -20,28 +20,43 @@ class MyWeatherView: BaseView {
     let windSpeedLabel = PaddedLabel(padding: Label.Font.padding, text: "")
     let messageLabel = PaddedLabel(padding: Label.Font.padding, text: "")
     
-    var weatherdata: Weathers = Weathers( weather: [Weather(main: "", description: "", icon: "")], main: Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity: 0), wind: Wind(speed: 0), name: ""){
-        
-        didSet {
-            locationLabel.text = weatherdata.name
-            
-            temperatureLabel.text = "지금은 \(decimalPointFormatter(newValue: (weatherdata.main.temp - 273.15)))도에요"
-            temperatureLabel.backgroundColor = .white
-            
-            humidityLabel.text = "\(weatherdata.main.humidity)% 만큼 습해요!"
-            humidityLabel.backgroundColor = .white
-            
-            windSpeedLabel.text = "\(weatherdata.wind.speed)m/s의 바람이 불어요!"
-            windSpeedLabel.backgroundColor = .white
-            let urlString = URL(string: "https://openweathermap.org/img/wn/\(weatherdata.weather[0].icon)@2x.png")
-            weatherImage.kf.setImage(with: urlString)
-            weatherImage.backgroundColor = .white
-            messageLabel.text = "좋은하루 되세요!"
-            messageLabel.backgroundColor = .white
-            dateTimeLabel.text = nowDate()
-        }
+    let viewModel = MyWeatherViewModel()
+//    var weatherdata: Weathers = Weathers( weather: [Weather(main: "", description: "", icon: "")], main: Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity: 0), wind: Wind(speed: 0), name: ""){
+//        
+//        didSet {
+//            locationLabel.text = weatherdata.name
+//            
+//            temperatureLabel.text = "지금은 \(decimalPointFormatter(newValue: (weatherdata.main.temp - 273.15)))도에요"
+//            temperatureLabel.backgroundColor = .white
+//            
+//            humidityLabel.text = "\(weatherdata.main.humidity)% 만큼 습해요!"
+//            humidityLabel.backgroundColor = .white
+//            
+//            windSpeedLabel.text = "\(weatherdata.wind.speed)m/s의 바람이 불어요!"
+//            windSpeedLabel.backgroundColor = .white
+//            let urlString = URL(string: "https://openweathermap.org/img/wn/\(weatherdata.weather[0].icon)@2x.png")
+//            weatherImage.kf.setImage(with: urlString)
+//            weatherImage.backgroundColor = .white
+//            messageLabel.text = "좋은하루 되세요!"
+//            messageLabel.backgroundColor = .white
+//            dateTimeLabel.text = nowDate()
+//        }
+//    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        print(#function)
+        bindData()
     }
-    
+    func bindData() {
+//        guard let receiveWeatherData = viewModel.outputWeahterData.value else { return }
+//        weatherdata = receiveWeatherData
+        viewModel.outputWeahterData.bind { data in
+            guard let data else { return }
+            self.locationLabel.text = data.name
+        }
+        print(#function)
+        
+    }
     override func setUpHierarachy() {
         [dateTimeLabel, locationSymbolLabel, locationLabel, reloadButton, shareButton, temperatureLabel, humidityLabel, weatherImage, windSpeedLabel, messageLabel].forEach {
             self.addSubview($0)

@@ -16,9 +16,11 @@ class BaseViewController: UIViewController {
         setUpHierachy()
         setUpLayout()
         setUpView()
+        setUpButton()
     }
     
     func setUpHierachy() { }
     func setUpLayout() { }
     func setUpView() { }
+    func setUpButton() { }
 }
